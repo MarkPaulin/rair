@@ -19,11 +19,22 @@ pak::pkg_install("markpaulin/rair")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+`rair` can be used to format R code:
 
 ``` r
 library(rair)
 bad_code <- "x+ 1  *(3 -0 )"
-format_code(bad_code)
-#> [1] "x + 1 * (3 - 0)\n"
+cat(format_code(bad_code))
+#> x + 1 * (3 - 0)
 ```
+
+## Acknowledgements
+
+This project is a thin wrapper around the
+(Air)\[<https://github.com/posit-dev/air>\] formatter. It is heavily
+dependent on the (rextendr)\[<https://github.com/extendr/rextendr>\]
+package, and draws from the
+(tomledit)\[<https://github.com/extendr/tomledit>\] package for
+rust-related inspiration and from
+(styler)\[<https://github.com/r-lib/styler>\] for designing an R API for
+styling code.
