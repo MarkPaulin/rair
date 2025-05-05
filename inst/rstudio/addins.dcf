@@ -1,0 +1,5 @@
+Name: Format active file
+Description: Format active file
+Binding: format_active_file
+Interactive: true
+
