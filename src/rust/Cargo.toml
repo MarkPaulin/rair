@@ -10,4 +10,7 @@ crate-type = [ 'staticlib' ]
 name = 'rair'
 
 [dependencies]
-extendr-api = '*'
+extendr-api = { version = "0.8.0", features = ["result_condition"] }
+air_r_formatter = { git = "https://github.com/posit-dev/air", version = "0.0.0" }
+air_r_parser = { git = "https://github.com/posit-dev/air", version = "0.0.0" }
+biome_formatter = { git = "https://github.com/biomejs/biome", rev = "2648fa4201be4afd26f44eca1a4e77aac0a67272" }

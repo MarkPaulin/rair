@@ -10,9 +10,9 @@
 #' @useDynLib rair, .registration = TRUE
 NULL
 
-#' Return string `"Hello world!"` to R.
-#' @export
-hello_world <- function() .Call(wrap__hello_world)
+format_file_ <- function(path) .Call(wrap__format_file_, path)
+
+format_code_ <- function(code) .Call(wrap__format_code_, code)
 
 
 # nolint end
