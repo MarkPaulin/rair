@@ -31,10 +31,9 @@ cat(format_code(bad_code))
 ## Acknowledgements
 
 This project is a thin wrapper around the
-(Air)\[<https://github.com/posit-dev/air>\] formatter. It is heavily
-dependent on the (rextendr)\[<https://github.com/extendr/rextendr>\]
+[Air](https://github.com/posit-dev/air) formatter. It is heavily
+dependent on the [rextendr](https://github.com/extendr/rextendr)
 package, and draws from the
-(tomledit)\[<https://github.com/extendr/tomledit>\] package for
-rust-related inspiration and from
-(styler)\[<https://github.com/r-lib/styler>\] for designing an R API for
-styling code.
+[tomledit](https://github.com/extendr/tomledit) package for rust-related
+inspiration and from [styler](https://github.com/r-lib/styler) for
+designing an R API for styling code.
