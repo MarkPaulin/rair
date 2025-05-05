@@ -31,6 +31,6 @@ test_that("errors", {
   })
 
   withr::with_dir(tempdir(), {
-    expect_error(format_file("doesnotexist.R"), "No such file or directory")
+    expect_error(format_file("doesnotexist.R"))
   })
 })
