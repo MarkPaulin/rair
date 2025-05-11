@@ -18,8 +18,8 @@ fn format_code_(code: String) -> Result<String> {
     return Err(RairRError::from(error).into());
   }
 
-  let formatted = format_node(options, &parse.syntax()).map_err(|e| RairRError::from(e))?;
-  let formatted = formatted.print().map_err(|e| RairRError::from(e))?;
+  let formatted = format_node(options, &parse.syntax()).map_err(RairRError::from)?;
+  let formatted = formatted.print().map_err(RairRError::from)?;
   let formatted = formatted.into_code();
   Ok(formatted)
 }
@@ -33,10 +33,11 @@ fn format_file_(path: &str) -> Result<bool> {
   if old.len() == formatted.len() && old == formatted {
     Ok(false)
   } else {
-    let _ = std::fs::write(path, formatted).map_err(|e| RairRError::OtherError(Box::new(e)))?;
+    std::fs::write(path, formatted).map_err(|e| RairRError::OtherError(Box::new(e)))?;
     Ok(true)
   }
 }
+
 
 // Macro to generate exports.
 // This ensures exported functions are registered with R.

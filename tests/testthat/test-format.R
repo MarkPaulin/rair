@@ -1,7 +1,10 @@
 test_that("code is formatted", {
   old <- "\n 3+   2"
   exp <- "3 + 2\n"
-  expect_equal(format_code(old), exp)
+  expect_equal(
+    format_code(old),
+    exp
+  )
 })
 
 test_that("files are formatted", {
@@ -23,7 +26,7 @@ test_that("errors", {
   )
 
   withr::with_file("test.R", {
-    readr::write_file("+-293201i/", "test.R")
+    writeLines("+-293201i/", "test.R")
     expect_error(
       format_file("test.R"),
       "Failed to parse due to syntax errors"

@@ -11,7 +11,6 @@ pub(crate) enum RairRError {
     PrintError(PrintError),
     ExtendrError(Error),
     OtherError(Box<dyn std::error::Error>),
-    CrateError(String),
 }
 
 impl From<RairRError> for Error {
@@ -22,7 +21,6 @@ impl From<RairRError> for Error {
             RairRError::PrintError(e) => Error::Other(e.to_string()),
             RairRError::ExtendrError(e) => e,
             RairRError::OtherError(e) => Error::Other(e.to_string()),
-            RairRError::CrateError(e) => Error::Other(e),
         }
     }
 }
