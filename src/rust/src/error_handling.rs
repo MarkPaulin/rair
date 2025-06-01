@@ -4,7 +4,6 @@ use air_r_parser::ParseError;
 use biome_formatter::diagnostics::FormatError;
 use biome_formatter::diagnostics::PrintError;
 
-#[derive(Debug)]
 pub(crate) enum RairRError {
     ParseError(ParseError),
     FormatError(FormatError),
