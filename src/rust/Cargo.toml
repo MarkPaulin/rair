@@ -3,7 +3,7 @@ name = 'rair'
 publish = false
 version = '0.1.0'
 edition = '2021'
-rust-version = '1.65'
+rust-version = '1.83'
 
 [lib]
 crate-type = [ 'staticlib' ]
@@ -11,6 +11,6 @@ name = 'rair'
 
 [dependencies]
 extendr-api = { version = "0.8.0", features = ["result_condition"] }
-air_r_formatter = { git = "https://github.com/posit-dev/air", version = "0.0.0" }
-air_r_parser = { git = "https://github.com/posit-dev/air", version = "0.0.0" }
+air_r_formatter = { git = "https://github.com/posit-dev/air", rev = "acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7" }
+air_r_parser = { git = "https://github.com/posit-dev/air", rev = "acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7" }
 biome_formatter = { git = "https://github.com/biomejs/biome", rev = "2648fa4201be4afd26f44eca1a4e77aac0a67272" }

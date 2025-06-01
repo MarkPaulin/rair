@@ -6,8 +6,9 @@ git = "https://github.com/biomejs/biome"
 rev = "2648fa4201be4afd26f44eca1a4e77aac0a67272"
 replace-with = "vendored-sources"
 
-[source."git+https://github.com/posit-dev/air"]
+[source."git+https://github.com/posit-dev/air?rev=acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7"]
 git = "https://github.com/posit-dev/air"
+rev = "acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7"
 replace-with = "vendored-sources"
 
 [source."git+https://github.com/r-lib/tree-sitter-r?rev=a0d3e3307489c3ca54da8c7b5b4e0c5f5fd6953a"]
