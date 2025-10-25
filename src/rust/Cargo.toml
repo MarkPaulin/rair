@@ -14,6 +14,8 @@ lto = true
 
 [dependencies]
 extendr-api = { version = "0.8.0", features = ["result_condition"] }
-air_r_formatter = { git = "https://github.com/posit-dev/air", rev = "acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7" }
-air_r_parser = { git = "https://github.com/posit-dev/air", rev = "acdccdd35d21b0ac2c6fb8a7afd6bb983d2f15f7" }
-biome_formatter = { git = "https://github.com/biomejs/biome", rev = "2648fa4201be4afd26f44eca1a4e77aac0a67272" }
+air_r_parser = { git = "https://github.com/posit-dev/air", rev = "bf4ecb0b06120d6d6e2ed831cd3a130aaa96c3a3" }
+air_r_formatter = { git = "https://github.com/posit-dev/air", rev = "bf4ecb0b06120d6d6e2ed831cd3a130aaa96c3a3" }
+settings = { git = "https://github.com/posit-dev/air", rev = "bf4ecb0b06120d6d6e2ed831cd3a130aaa96c3a3" }
+biome_formatter = { git = "https://github.com/biomejs/biome", rev = "c13fc60726883781e4530a4437724273b560c8e0" }
+extendr-macros = "0.8.1"

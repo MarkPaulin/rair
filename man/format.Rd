@@ -5,7 +5,7 @@
 \alias{format_file}
 \title{Format R code}
 \usage{
-format_code(code)
+format_code(code, line_width = NULL)
 
 format_file(file)
 }

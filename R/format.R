@@ -13,14 +13,23 @@
 #'
 #' @export
 #' @rdname format
-format_code <- function(code) {
+format_code <- function(code, line_width = NULL) {
   check_string(code, allow_empty = FALSE)
-  .catch(format_code_(code))
+  check_number_whole(line_width, allow_null = TRUE)
+  stopifnot("`line_width` must be positive" = line_width > 0)
+
+  options <- list(line_width = line_width)
+  .catch(format_code_(code, options))
 }
 
 #' @export
 #' @rdname format
-format_file <- function(file) {
+format_file <- function(file, line_width = NULL) {
   check_string(file, allow_empty = FALSE)
-  .catch(format_file_(file))
+  check_number_whole(line_width, allow_null = TRUE)
+  stopifnot("`line_width` must be positive" = line_width > 0)
+
+  options <- list(line_width = line_width)
+
+  .catch(format_file_(file, options))
 }
