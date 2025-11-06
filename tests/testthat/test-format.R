@@ -9,12 +9,12 @@ test_that("code is formatted", {
 
 test_that("files are formatted", {
   withr::with_file("test.R", {
-    readr::write_file("\n 3+   2", "test.R")
+    writeLines("\n 3+   2", "test.R")
     expect_true(format_file("test.R"))
     expect_false(format_file("test.R"))
 
     exp <- "3 + 2\n"
-    out <- readr::read_file("test.R")
+    out <- readChar("test.R", file.info("test.R")$size)
     expect_equal(out, exp)
   })
 })

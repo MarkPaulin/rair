@@ -10,9 +10,9 @@
 #' @useDynLib rair, .registration = TRUE
 NULL
 
-format_file_ <- function(path) .Call(wrap__format_file_, path)
+format_file_ <- function(path, options) .Call(wrap__format_file_, path, options)
 
-format_code_ <- function(code) .Call(wrap__format_code_, code)
+format_code_ <- function(code, options) .Call(wrap__format_code_, code, options)
 
 
 # nolint end
