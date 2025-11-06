@@ -72,14 +72,16 @@ fn format_code_(code: String, options: FormatOptions) -> Result<String> {
 }
 
 #[extendr]
-fn format_file_(path: &str, options: FormatOptions) -> Result<bool> {
+fn format_file_(path: &str, options: FormatOptions, check: bool) -> Result<bool> {
     let old = read_to_string(path).map_err(|e| RairRError::Other(Box::new(e)))?;
     let formatted = format_code_(old.clone(), options)?;
 
     if old.len() == formatted.len() && old == formatted {
         Ok(false)
     } else {
-        std::fs::write(path, formatted).map_err(|e| RairRError::Other(Box::new(e)))?;
+        if !check {
+            std::fs::write(path, formatted).map_err(|e| RairRError::Other(Box::new(e)))?;
+        }
         Ok(true)
     }
 }

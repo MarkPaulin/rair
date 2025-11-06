@@ -15,6 +15,7 @@ format_code(
 
 format_file(
   file,
+  check = FALSE,
   line_width = NULL,
   indent_width = NULL,
   indent_style = NULL,
@@ -33,6 +34,9 @@ format_file(
 \item{persistent_line_breaks}{whether or not persistent line breaks are allowed}
 
 \item{file}{path of R file to format}
+
+\item{check}{if \code{TRUE}, check if files would be modified by formatting but
+won't be changed}
 }
 \value{
 \code{format_code} returns the formatted R code. \code{format_file} returns

@@ -2,6 +2,8 @@
 #'
 #' Formats a string containing R code.
 #' @param code character scalar containing R code
+#' @param check if `TRUE`, check if files would be modified by formatting but
+#'   won't be changed
 #' @param file path of R file to format
 #' @param line_width preferred maximum line length
 #' @param indent_width number of spaces per indentation level
@@ -17,7 +19,13 @@
 #'
 #' @export
 #' @rdname format
-format_code <- function(code, line_width = NULL, indent_width = NULL, indent_style = NULL, persistent_line_breaks = NULL) {
+format_code <- function(
+  code,
+  line_width = NULL,
+  indent_width = NULL,
+  indent_style = NULL,
+  persistent_line_breaks = NULL
+) {
   check_string(code, allow_empty = FALSE)
   check_number_whole(line_width, allow_null = TRUE)
   stopifnot("`indent_width` must be positive" = line_width > 0)
@@ -26,18 +34,35 @@ format_code <- function(code, line_width = NULL, indent_width = NULL, indent_sty
   stopifnot("`line_width` must be positive" = line_width > 0)
 
   check_string(indent_style, allow_null = TRUE)
-  stopifnot("`indent_style` must be one of 'tab' or 'space'" = indent_style %in% c("tab", "space"))
+  stopifnot(
+    "`indent_style` must be one of 'tab' or 'space'" = indent_style %in%
+      c("tab", "space")
+  )
 
   check_bool(persistent_line_breaks, allow_null = TRUE)
 
-  options <- list(line_width = line_width, indent_width = indent_width, indent_style = indent_style, persistent_line_breaks = persistent_line_breaks)
+  options <- list(
+    line_width = line_width,
+    indent_width = indent_width,
+    indent_style = indent_style,
+    persistent_line_breaks = persistent_line_breaks
+  )
   .catch(format_code_(code, options))
 }
 
 #' @export
 #' @rdname format
-format_file <- function(file, line_width = NULL, indent_width = NULL, indent_style = NULL, persistent_line_breaks = NULL) {
+format_file <- function(
+  file,
+  check = FALSE,
+  line_width = NULL,
+  indent_width = NULL,
+  indent_style = NULL,
+  persistent_line_breaks = NULL
+) {
   check_string(file, allow_empty = FALSE)
+  check_bool(check)
+
   check_number_whole(line_width, allow_null = TRUE)
   stopifnot("`indent_width` must be positive" = line_width > 0)
 
@@ -45,11 +70,18 @@ format_file <- function(file, line_width = NULL, indent_width = NULL, indent_sty
   stopifnot("`line_width` must be positive" = line_width > 0)
 
   check_string(indent_style, allow_null = TRUE)
-  stopifnot("`indent_style` must be one of 'tab' or 'space'" = indent_style %in% c("tab", "space"))
+  stopifnot(
+    "`indent_style` must be one of 'tab' or 'space'" = indent_style %in%
+      c("tab", "space")
+  )
 
   check_bool(persistent_line_breaks, allow_null = TRUE)
 
-  options <- list(line_width = line_width, indent_width = indent_width, indent_style = indent_style)
+  options <- list(
+    line_width = line_width,
+    indent_width = indent_width,
+    indent_style = indent_style
+  )
 
-  .catch(format_file_(file, options))
+  .catch(format_file_(file, options, check))
 }

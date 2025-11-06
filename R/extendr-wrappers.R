@@ -10,7 +10,7 @@
 #' @useDynLib rair, .registration = TRUE
 NULL
 
-format_file_ <- function(path, options) .Call(wrap__format_file_, path, options)
+format_file_ <- function(path, options, check) .Call(wrap__format_file_, path, options, check)
 
 format_code_ <- function(code, options) .Call(wrap__format_code_, code, options)
 

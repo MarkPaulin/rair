@@ -19,6 +19,17 @@ test_that("files are formatted", {
   })
 })
 
+test_that("files are not formatted", {
+  withr::with_file("test.R", {
+    code <- "\n 3+   2"
+    cat(code, file = "test.R")
+    expect_true(format_file("test.R", check = TRUE))
+
+    out <- readChar("test.R", file.info("test.R")$size)
+    expect_equal(out, code)
+  })
+})
+
 test_that("errors", {
   expect_error(
     format_code("+-293201i/"),
