@@ -4,7 +4,7 @@
 \name{rair-package}
 \alias{rair}
 \alias{rair-package}
-\title{rair: What the Package Does (One Line, Title Case)}
+\title{rair: Format R Code}
 \description{
 Format R code with Air, an R formatter written in Rust.
 }

@@ -6,7 +6,7 @@ use std::str::FromStr;
 use air_r_formatter::context::RFormatOptions;
 use air_r_formatter::format_node;
 use air_r_parser::RParserOptions;
-use settings::{IndentStyle, IndentWidth, LineWidth};
+use settings::{IndentStyle, IndentWidth, LineWidth, PersistentLineBreaks};
 
 mod error_handling;
 use error_handling::RairRError;
@@ -16,6 +16,7 @@ struct FormatOptions {
     pub line_width: Option<u16>,
     pub indent_width: Option<u8>,
     pub indent_style: Option<String>,
+    pub persistent_line_breaks: Option<bool>,
 }
 
 impl FormatOptions {
@@ -35,10 +36,22 @@ impl FormatOptions {
             None => IndentStyle::default(),
         };
 
+        let persistent_line_breaks = match self.persistent_line_breaks {
+            Some(persistent_line_breaks) => {
+                if persistent_line_breaks {
+                    PersistentLineBreaks::Respect
+                } else {
+                    PersistentLineBreaks::Ignore
+                }
+            }
+            None => PersistentLineBreaks::Respect,
+        };
+
         RFormatOptions::new()
             .with_line_width(line_width)
             .with_indent_width(indent_width)
             .with_indent_style(indent_style)
+            .with_persistent_line_breaks(persistent_line_breaks)
     }
 }
 

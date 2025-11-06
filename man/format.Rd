@@ -5,9 +5,21 @@
 \alias{format_file}
 \title{Format R code}
 \usage{
-format_code(code, line_width = NULL, indent_width = NULL, indent_style = NULL)
+format_code(
+  code,
+  line_width = NULL,
+  indent_width = NULL,
+  indent_style = NULL,
+  persistent_line_breaks = NULL
+)
 
-format_file(file, line_width = NULL, indent_width = NULL, indent_style = NULL)
+format_file(
+  file,
+  line_width = NULL,
+  indent_width = NULL,
+  indent_style = NULL,
+  persistent_line_breaks = NULL
+)
 }
 \arguments{
 \item{code}{character scalar containing R code}
@@ -17,6 +29,8 @@ format_file(file, line_width = NULL, indent_width = NULL, indent_style = NULL)
 \item{indent_width}{number of spaces per indentation level}
 
 \item{indent_style}{whether to use \code{"spaces"} or \code{"tabs"} for indentation}
+
+\item{persistent_line_breaks}{whether or not persistent line breaks are allowed}
 
 \item{file}{path of R file to format}
 }
