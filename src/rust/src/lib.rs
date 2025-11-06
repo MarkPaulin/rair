@@ -1,62 +1,75 @@
 use extendr_api::prelude::*;
 use extendr_macros::TryFromRobj;
 use std::fs::read_to_string;
+use std::str::FromStr;
 
 use air_r_formatter::context::RFormatOptions;
 use air_r_formatter::format_node;
 use air_r_parser::RParserOptions;
-use settings::LineWidth;
+use settings::{IndentStyle, IndentWidth, LineWidth};
 
 mod error_handling;
 use error_handling::RairRError;
 
 #[derive(Debug, Clone, TryFromRobj)]
 struct FormatOptions {
-  pub line_width: Option<u16>,
+    pub line_width: Option<u16>,
+    pub indent_width: Option<u8>,
+    pub indent_style: Option<String>,
 }
 
 impl FormatOptions {
-  fn to_r_format_options(&self) -> RFormatOptions {
-    let line_width = match self.line_width {
-      Some(value) => LineWidth::try_from(value).unwrap_or_default(),
-      None => LineWidth::default()
-    };
+    fn to_r_format_options(&self) -> RFormatOptions {
+        let line_width = match self.line_width {
+            Some(value) => LineWidth::try_from(value).unwrap_or_default(),
+            None => LineWidth::default(),
+        };
 
-    RFormatOptions::new()
-      .with_line_width(line_width)
-  }
+        let indent_width = match self.indent_width {
+            Some(value) => IndentWidth::try_from(value).unwrap_or_default(),
+            None => IndentWidth::default(),
+        };
+
+        let indent_style = match &self.indent_style {
+            Some(value) => IndentStyle::from_str(value.as_str()).unwrap_or_default(),
+            None => IndentStyle::default(),
+        };
+
+        RFormatOptions::new()
+            .with_line_width(line_width)
+            .with_indent_width(indent_width)
+            .with_indent_style(indent_style)
+    }
 }
 
 #[extendr]
 fn format_code_(code: String, options: FormatOptions) -> Result<String> {
-  let options = options.to_r_format_options();
-  let parse = air_r_parser::parse(&code, RParserOptions::default());
+    let options = options.to_r_format_options();
+    let parse = air_r_parser::parse(&code, RParserOptions::default());
 
-  if parse.has_error() {
-    let error = parse.into_error().unwrap();
-    return Err(RairRError::from(error).into());
-  }
+    if parse.has_error() {
+        let error = parse.into_error().unwrap();
+        return Err(RairRError::from(error).into());
+    }
 
-  let formatted = format_node(options, &parse.syntax()).map_err(RairRError::from)?;
-  let formatted = formatted.print().map_err(RairRError::from)?;
-  let formatted = formatted.into_code();
-  Ok(formatted)
+    let formatted = format_node(options, &parse.syntax()).map_err(RairRError::from)?;
+    let formatted = formatted.print().map_err(RairRError::from)?;
+    let formatted = formatted.into_code();
+    Ok(formatted)
 }
-
 
 #[extendr]
 fn format_file_(path: &str, options: FormatOptions) -> Result<bool> {
-  let old = read_to_string(path).map_err(|e| RairRError::OtherError(Box::new(e)))?;
-  let formatted = format_code_(old.clone(), options)?;
+    let old = read_to_string(path).map_err(|e| RairRError::Other(Box::new(e)))?;
+    let formatted = format_code_(old.clone(), options)?;
 
-  if old.len() == formatted.len() && old == formatted {
-    Ok(false)
-  } else {
-    std::fs::write(path, formatted).map_err(|e| RairRError::OtherError(Box::new(e)))?;
-    Ok(true)
-  }
+    if old.len() == formatted.len() && old == formatted {
+        Ok(false)
+    } else {
+        std::fs::write(path, formatted).map_err(|e| RairRError::Other(Box::new(e)))?;
+        Ok(true)
+    }
 }
-
 
 // Macro to generate exports.
 // This ensures exported functions are registered with R.

@@ -5,12 +5,18 @@
 \alias{format_file}
 \title{Format R code}
 \usage{
-format_code(code, line_width = NULL)
+format_code(code, line_width = NULL, indent_width = NULL, indent_style = NULL)
 
-format_file(file)
+format_file(file, line_width = NULL, indent_width = NULL, indent_style = NULL)
 }
 \arguments{
 \item{code}{character scalar containing R code}
+
+\item{line_width}{preferred maximum line length}
+
+\item{indent_width}{number of spaces per indentation level}
+
+\item{indent_style}{whether to use \code{"spaces"} or \code{"tabs"} for indentation}
 
 \item{file}{path of R file to format}
 }

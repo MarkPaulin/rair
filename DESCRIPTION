@@ -1,5 +1,5 @@
 Package: rair
-Title: What the Package Does (One Line, Title Case)
+Title: Format R Code
 Version: 0.0.0.9000
 Authors@R: 
     person("Mark", "Paulin", , "paulin.mark@googlemail.com", role = c("aut", "cre"))
